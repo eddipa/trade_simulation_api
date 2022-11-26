@@ -118,7 +118,7 @@ class Simulation(models.Model):
         ax[0].set_title("Equirty Curve")
         ax[1].set_title("Account Growth")
 
-        basename = "mylogfile"
+        basename = "imgfile"
 
         suffix = datetime.datetime.now().strftime("%y%m%d_%H%M%S")
         # e.g. 'mylogfile_120508_171442'
