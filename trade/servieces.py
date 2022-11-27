@@ -3,7 +3,7 @@ import numpy as np
 
 class BaseSimulator:
     @staticmethod
-    def predict_profit(account_size, total_trades, risk_per_trade, win_rate, risk_reward):
+    def predict_profit(account_size, total_trades, risk_per_trade, win_rate, risk_reward, print_results=False):
         """
         Simulation method
 
@@ -25,6 +25,9 @@ class BaseSimulator:
 
         arg5 :
             risk_reward
+
+        arg6 :
+            print_results = False
 
         Returns
         -------
@@ -80,24 +83,6 @@ class BaseSimulator:
         gain = np.round(accounts[-1] - account_size, 2)
         growth_rate = np.round(
             (accounts[-1] - account_size) / account_size * 100, 2)
-        print("--- Trading Results ---\n")
-        print("Total trades       : {}".format(total_trades))
-        print("Wins               : {} / {}%".format(total_win, win_r))
-        print("Average Win        : {}".format(np.round(avg_win, 2)))
-        print("Average Loss       : {}".format(np.round(avg_loss, 2)))
-        print("Max Win            : {}".format(np.round(max_win, 2)))
-        print("Max Loss           : {}".format(np.round(max_loss, 2)))
-        print("Max Cons. Wins     : {}".format(max_con_w))
-        print("Max Cons. Loss     : {}".format(max_con_l))
-        print("Risk Reward Ratio  : {}".format(rrr))
-        print("Profit Factor      : {}".format(profit_factor))
-        print("Risk per trade     : {}%".format(risk_per_trade))
-        print("---")
-        print("Initial Account    : {}".format(account_size))
-        print("Profit             : {} / {}%".format(gain, growth_rate))
-        print("Final Account      : {}".format(np.round(account, 2)))
-        print()
-        print("Results are compounded. Spread and commissions are not calculated.")
 
         result_dict = {}
         result_dict["Total trades"] = "{}".format(total_trades)
@@ -114,6 +99,26 @@ class BaseSimulator:
         result_dict["Initial Account"] = "{}".format(account_size)
         result_dict["Profit"] = "{} / {}%".format(gain, growth_rate)
         result_dict["Final Account"] = "{}".format(np.round(account, 2))
+
+        if (print_results):
+            print("--- Trading Results ---\n")
+            print("Total trades       : {}".format(total_trades))
+            print("Wins               : {} / {}%".format(total_win, win_r))
+            print("Average Win        : {}".format(np.round(avg_win, 2)))
+            print("Average Loss       : {}".format(np.round(avg_loss, 2)))
+            print("Max Win            : {}".format(np.round(max_win, 2)))
+            print("Max Loss           : {}".format(np.round(max_loss, 2)))
+            print("Max Cons. Wins     : {}".format(max_con_w))
+            print("Max Cons. Loss     : {}".format(max_con_l))
+            print("Risk Reward Ratio  : {}".format(rrr))
+            print("Profit Factor      : {}".format(profit_factor))
+            print("Risk per trade     : {}%".format(risk_per_trade))
+            print("---")
+            print("Initial Account    : {}".format(account_size))
+            print("Profit             : {} / {}%".format(gain, growth_rate))
+            print("Final Account      : {}".format(np.round(account, 2)))
+            print()
+            print("Results are compounded. Spread and commissions are not calculated.")
 
         return result_dict
 
