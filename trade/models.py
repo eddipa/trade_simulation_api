@@ -8,8 +8,44 @@ from django.conf import settings
 
 from django.db import models
 
+from .servieces import BaseSimulator
+
 
 class Simulation(models.Model):
+    """
+    Simulation model
+
+    This model is used to simplify the process of generating the results of the
+    Simulation.
+
+    This model is NOT saved!
+
+    Properties
+    ----------
+    account_size :
+        initial account size
+
+    total_trades :
+        number of trades that we want to simulate
+
+    risk_per_trade :
+        the percentage of risk per trade. for example 2 represents 2 percent risk
+        per trade
+
+    win_rate :
+        the percentage of winning in a single. aka: if we trade this strategy for
+        100 times how many wins do we have.
+
+    risk_reward :
+        the percentage of profit erp trade devided by the risk percentage. 
+        (REWARD/RISK). ironic! :D
+
+    methods
+    -------
+    simulate :
+        returns predict_profit result from BaseSimulator
+
+    """
     account_size = models.DecimalField(
         max_digits=20, decimal_places=2, default=1000)
     total_trades = models.IntegerField(default=100)
@@ -20,6 +56,19 @@ class Simulation(models.Model):
         max_digits=4, decimal_places=4, default=2)
 
     def simulate(self):
+        """
+        Simulatie mathod
+
+        This method calls predict_prodit method from BaseSimulation class
+
+        Returns
+        -------
+        simulation result in dictionary format
+
+        """
+        return BaseSimulator.predict_profit(self.account_size, self.total_trades, self.risk_per_trade, self.win_rate, self.risk_reward)
+
+    def simulate_old(self):
         account = self.account_size
         accounts = [account]
         profits = []
@@ -121,7 +170,7 @@ class Simulation(models.Model):
         basename = "imgfile"
 
         suffix = datetime.datetime.now().strftime("%y%m%d_%H%M%S")
-        # e.g. 'mylogfile_120508_171442'
+
         filename = "_".join([basename, suffix])
 
         destination_path = os.path.join(settings.MEDIA_ROOT, filename + '.png')

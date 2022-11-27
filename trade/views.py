@@ -23,21 +23,14 @@ def simulation(request):
     JsonResponse
 
     """
-    account_size = request.GET['size']
-    total_trades = request.GET['total']
-    risk_per_trade = request.GET['risk']
-    win_rate = request.GET['winrate']
-    risk_reward = request.GET['riskreward']
 
     sim_obj = Simulation()
-    sim_obj.account_size
-    sim_obj.total_trades
-    sim_obj.risk_per_trade
-    sim_obj.win_rate
-    sim_obj.risk_reward
+    sim_obj.account_size = float(request.GET['size'])
+    sim_obj.total_trades = int(request.GET['total'])
+    sim_obj.risk_per_trade = float(request.GET['risk'])
+    sim_obj.win_rate = float(request.GET['winrate'])
+    sim_obj.risk_reward = float(request.GET['riskreward'])
 
     serializer = SimulationSerializer(sim_obj)
-
-    #data = sim_obj.simulate()
 
     return Response(serializer.data)
