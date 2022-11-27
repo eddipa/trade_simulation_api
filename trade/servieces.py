@@ -9,6 +9,9 @@ class BaseSimulator:
 
         This method generates simulation data in a dictionary format
 
+        @ this method is from the following article by Atilla Yurtseven:
+        https://towardsdatascience.com/how-to-simulate-trades-in-python-7e613c83fd5a
+
         Parameters
         ----------
         arg1 :
