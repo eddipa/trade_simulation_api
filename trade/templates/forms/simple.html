@@ -1,0 +1,26 @@
+<form action="{% url 'simulate_simple'%}" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="size" class="form-label">Initial account balance</label>
+        <input class="form-control" type="number" id="size" name="size" placeholder="1000.00">
+    </div>
+    <div class="mb-3">
+        <label for="total" class="form-label">Total number of trades we are going to simulate</label>
+        <input class="form-control" type="number" id="total" name="total" placeholder="100">
+    </div>
+    <div class="mb-3">
+        <label for="risk" class="form-label">Percentage of risk per trade</label>
+        <input class="form-control" type="number" id="risk" name="risk" placeholder="1.00">
+    </div>
+    <div class="mb-3">
+        <label for="winrate" class="form-label">Winrate Percentage</label>
+        <input class="form-control" type="number" id="winrate" name="winrate" placeholder="60.00">
+    </div>
+    <div class="mb-3">
+        <label for="riskreward" class="form-label">Reward Percent / Risk Percent ( aka risk/reward )</label>
+        <input class="form-control" type="number" id="riskreward" name="riskreward" placeholder="2.0">
+    </div>
+    <div>
+        <input type="submit" class="btn btn-primary mb-3" value="Simulate!" />
+    </div>
+</form>
